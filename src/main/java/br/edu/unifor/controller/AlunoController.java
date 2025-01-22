@@ -9,6 +9,7 @@ import br.edu.unifor.dto.AlunoDTO;
 import br.edu.unifor.service.AlunoService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
@@ -86,6 +87,28 @@ public class AlunoController {
         alunoDTO = alunoService.atualizarAluno(matricula, alunoDTO);
 
         return Response.ok(alunoDTO).build();
+    }
+
+    /**
+     * O {@link Retry} garante que, em caso de erro, o método tentará ser executado
+     * mais uma vez.
+     * 
+     * O {@link CircuitBreaker} Caso ocorram vários erros consecutivos, o
+     * serviço para de responder imediatamente por
+     * algum tempo enquanto se recupera.
+     * 
+     *
+     */
+    @DELETE
+    @Path("/{matricula}")
+    @CircuitBreaker
+    @Retry(maxRetries = 3)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response excluirAluno(@PathParam(value = "matricula") Long matricula) {
+
+        alunoService.excluirAluno(matricula);
+
+        return Response.ok().build();
     }
 
 }

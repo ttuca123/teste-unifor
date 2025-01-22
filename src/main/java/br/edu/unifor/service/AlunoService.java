@@ -54,4 +54,13 @@ public class AlunoService {
 
     }
 
+    public void excluirAluno(Long matricula) {
+
+        if (null != matricula) {
+
+            alunoDAO.excluirAluno(matricula);
+        }
+
+    }
+
 }
