@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import br.edu.unifor.dao.AlunoDAO;
 import br.edu.unifor.dto.AlunoDTO;
+import br.edu.unifor.model.Aluno;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -36,6 +37,20 @@ public class AlunoService {
 
             alunoDAO.inserirAluno(alunoDTO);
         }
+
+    }
+
+    public AlunoDTO atualizarAluno(Long matricula, AlunoDTO alunoDTO) {
+
+        Aluno aluno;
+
+        if (null != matricula) {
+
+            aluno = alunoDAO.atualizarAluno(matricula, alunoDTO);
+            alunoDTO = new AlunoDTO(matricula, aluno.getNome(), aluno.getCpf(), aluno.getFone(), aluno.getAtivo());
+        }
+
+        return alunoDTO;
 
     }
 
