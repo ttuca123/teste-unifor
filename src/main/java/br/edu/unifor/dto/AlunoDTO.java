@@ -1,14 +1,12 @@
 package br.edu.unifor.dto;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author Artur Cavalcante
  * @since 22/01/2025
  */
-public class AlunoDTO implements Serializable {
+public class AlunoDTO {
 
     @JsonProperty("matricula")
     private Long matricula;
@@ -19,9 +17,21 @@ public class AlunoDTO implements Serializable {
     @JsonProperty("cpf")
     private String cpf;
 
-    public AlunoDTO(String nome, String cpf) {
+    @JsonProperty("fone")
+    private String fone;
+
+    @JsonProperty("ativo")
+    private Boolean ativo;
+
+    public AlunoDTO() {
+
+    }
+
+    public AlunoDTO(String nome, String cpf, String fone, Boolean ativo) {
         this.nome = nome;
         this.cpf = cpf;
+        this.fone = fone;
+        this.ativo = ativo;
     }
 
     public AlunoDTO(Long matricula, String nome, String cpf) {
@@ -53,6 +63,22 @@ public class AlunoDTO implements Serializable {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getFone() {
+        return fone;
+    }
+
+    public void setFone(String fone) {
+        this.fone = fone;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 
 }

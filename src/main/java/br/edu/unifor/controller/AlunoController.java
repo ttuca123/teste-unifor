@@ -10,6 +10,7 @@ import br.edu.unifor.service.AlunoService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
@@ -40,6 +41,27 @@ public class AlunoController {
     public Response getAlunos() {
 
         return Response.ok(alunoService.getAlunos()).build();
+    }
+
+    /**
+     * O {@link Retry} garante que, em caso de erro, o método tentará ser executado
+     * mais uma vez.
+     * 
+     * O {@link CircuitBreaker} Caso ocorram vários erros consecutivos, o
+     * serviço para de responder imediatamente por
+     * algum tempo enquanto se recupera.
+     * 
+     *
+     */
+    @POST
+    @CircuitBreaker
+    @Retry(maxRetries = 3)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response inserirAluno(AlunoDTO alunoDTO) {
+
+        alunoService.inserirAluno(alunoDTO);
+
+        return Response.ok().build();
     }
 
 }
