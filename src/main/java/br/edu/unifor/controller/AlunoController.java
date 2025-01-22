@@ -11,7 +11,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -62,6 +64,28 @@ public class AlunoController {
         alunoService.inserirAluno(alunoDTO);
 
         return Response.ok().build();
+    }
+
+    /**
+     * O {@link Retry} garante que, em caso de erro, o método tentará ser executado
+     * mais uma vez.
+     * 
+     * O {@link CircuitBreaker} Caso ocorram vários erros consecutivos, o
+     * serviço para de responder imediatamente por
+     * algum tempo enquanto se recupera.
+     * 
+     *
+     */
+    @PUT
+    @Path("/{matricula}")
+    @CircuitBreaker
+    @Retry(maxRetries = 3)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response atualizarAluno(@PathParam(value = "matricula") Long matricula, AlunoDTO alunoDTO) {
+
+        alunoDTO = alunoService.atualizarAluno(matricula, alunoDTO);
+
+        return Response.ok(alunoDTO).build();
     }
 
 }

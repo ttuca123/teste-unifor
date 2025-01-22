@@ -38,4 +38,18 @@ public class AlunoDAO implements PanacheRepository<Aluno> {
 
     }
 
+    @Transactional
+    public Aluno atualizarAluno(Long matricula, AlunoDTO alunoDTO) {
+
+        Aluno aluno = findById(matricula);
+
+        if (null != aluno) {
+
+            aluno.setNome(alunoDTO.getNome());
+            aluno.setFone(alunoDTO.getFone());
+            persist(aluno);
+        }
+        return aluno;
+    }
+
 }
