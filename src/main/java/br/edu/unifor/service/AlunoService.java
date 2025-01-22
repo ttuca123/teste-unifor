@@ -25,9 +25,18 @@ public class AlunoService {
     }
 
     public List<AlunoDTO> getAlunos() {
-        
+
         return alunoDAO.findAllAlunos().stream().map(aluno -> new AlunoDTO(aluno.getNome(),
-                aluno.getCpf())).collect(Collectors.toList());
+                aluno.getCpf(), aluno.getFone(), aluno.getAtivo())).collect(Collectors.toList());
+    }
+
+    public void inserirAluno(AlunoDTO alunoDTO) {
+
+        if (null == alunoDTO.getMatricula()) {
+
+            alunoDAO.inserirAluno(alunoDTO);
+        }
+
     }
 
 }
