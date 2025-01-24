@@ -11,7 +11,7 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Entity
-public class Aluno {
+public class Aluno{
 
     public Aluno() {
 

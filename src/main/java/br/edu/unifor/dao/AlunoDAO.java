@@ -16,12 +16,15 @@ public class AlunoDAO implements PanacheRepository<Aluno> {
 
     public List<Aluno> findAllAlunos() {
 
-        List<Aluno> alunosLista = new ArrayList();
+        PanacheQuery<Aluno> alunos = findAll();   
 
-        PanacheQuery<Aluno> alunos = findAll();
-        alunos.firstResultOptional().ifPresent(aluno -> alunosLista.add(aluno));
+        return alunos.list();
+    }
 
-        return alunosLista;
+
+    public Aluno findAlunoById(Long matricula) {
+
+        return findById(matricula);
     }
 
     @Transactional

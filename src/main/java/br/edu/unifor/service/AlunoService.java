@@ -27,9 +27,21 @@ public class AlunoService {
 
     public List<AlunoDTO> getAlunos() {
 
-        return alunoDAO.findAllAlunos().stream().map(aluno -> new AlunoDTO(aluno.getNome(),
+        return alunoDAO.findAllAlunos().stream().map(aluno -> new AlunoDTO(aluno.getMatricula(), aluno.getNome(),
                 aluno.getCpf(), aluno.getFone(), aluno.getAtivo())).collect(Collectors.toList());
     }
+
+
+    public AlunoDTO getAlunoByMatricula(Long matricula) {
+
+        Aluno aluno = alunoDAO.findAlunoById(matricula);
+
+        return new AlunoDTO(aluno.getMatricula(), aluno.getNome(),
+                aluno.getCpf(), aluno.getFone(), aluno.getAtivo());
+    }
+
+
+
 
     public void inserirAluno(AlunoDTO alunoDTO) {
 

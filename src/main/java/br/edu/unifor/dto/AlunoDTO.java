@@ -32,7 +32,8 @@ public class AlunoDTO {
         this.nome = nome;
         this.cpf = cpf;
         this.fone = fone;
-        this.ativo = ativo;
+        this.ativo = ativo;    
+           
     }
 
     public AlunoDTO(String nome, String cpf, String fone, Boolean ativo) {
