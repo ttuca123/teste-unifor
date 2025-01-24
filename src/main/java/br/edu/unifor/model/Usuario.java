@@ -7,9 +7,24 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.util.Date;
+
 @Entity
 @Cacheable
 public class Usuario {
+
+    public Usuario() {
+
+    }
+
+    public Usuario(Long id, String nome, String cpf, String fone, Boolean ativo) {
+        this.idUsuario = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.fone = fone;
+        this.ativo = ativo;
+    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
