@@ -1,7 +1,7 @@
 package br.edu.unifor.controller;
 
-import br.edu.unifor.dto.DisciplinaDTO;
-import br.edu.unifor.service.DisciplinaService;
+import br.edu.unifor.dto.TurmaDTO;
+import br.edu.unifor.service.TurmaService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -10,12 +10,12 @@ import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.Retry;
 
-@Path("/v1/disciplinas")
+@Path("/v1/turmas")
 @ApplicationScoped
-public class DisciplinaController {
+public class TurmaController {
 
     @Inject
-    public DisciplinaService disciplinaService;
+    public TurmaService turmaService;
 
     /**
      * O {@link Retry} garante que, em caso de erro, o método tentará ser executado
@@ -32,9 +32,9 @@ public class DisciplinaController {
     @CircuitBreaker
     @Retry(maxRetries = 1)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDisciplinas() {
+    public Response getTurmas() {
 
-        return Response.ok(disciplinaService.getDisciplinas()).build();
+        return Response.ok(turmaService.getTurmas()).build();
     }
 
 
@@ -53,9 +53,9 @@ public class DisciplinaController {
     @CircuitBreaker
     @Retry(maxRetries = 1)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDisciplinaDetalhada(@PathParam(value = "id") Long id) {
+    public Response getTurmaDetalhada(@PathParam(value = "id") Long id) {
 
-        return Response.ok(disciplinaService.getDisciplinaById(id)).build();
+        return Response.ok(turmaService.getTurmaById(id)).build();
     }
 
     /**
@@ -72,9 +72,9 @@ public class DisciplinaController {
     @CircuitBreaker
     @Retry(maxRetries = 3)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response inserirDisciplina(DisciplinaDTO disciplinaDTO) {
+    public Response inserirTurma(TurmaDTO turmaDTO) {
 
-        disciplinaService.inserirDisciplina(disciplinaDTO);
+        turmaService.inserirTurma(turmaDTO);
 
         return Response.ok().build();
     }
@@ -94,11 +94,11 @@ public class DisciplinaController {
     @CircuitBreaker
     @Retry(maxRetries = 3)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response atualizarDisciplina(@PathParam(value = "id") Long id, DisciplinaDTO disciplinaDTO) {
+    public Response atualizarTurma(@PathParam(value = "id") Long id, TurmaDTO turmaDTO) {
 
-        disciplinaDTO = disciplinaService.atualizarDisciplina(id, disciplinaDTO);
+        turmaDTO = turmaService.atualizarTurma(id, turmaDTO);
 
-        return Response.ok(disciplinaDTO).build();
+        return Response.ok(turmaDTO).build();
     }
 
     /**
@@ -116,9 +116,9 @@ public class DisciplinaController {
     @CircuitBreaker
     @Retry(maxRetries = 3)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response excluirDisciplina(@PathParam(value = "id") Long id) {
+    public Response excluirTurma(@PathParam(value = "id") Long id) {
 
-        disciplinaService.excluirDisciplina(id);
+        turmaService.excluirTurma(id);
 
         return Response.ok().build();
     }
