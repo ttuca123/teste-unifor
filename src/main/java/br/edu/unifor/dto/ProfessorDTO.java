@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class ProfessorDTO {
 
-    @JsonProperty("matricula")
-    private Long matricula;
+    @JsonProperty("id")
+    private Long id;
 
     @JsonProperty("nome")
     private String nome;
@@ -27,8 +27,8 @@ public class ProfessorDTO {
 
     }
 
-    public ProfessorDTO(Long matricula, String nome, String cpf, String fone, Boolean ativo) {
-        this.matricula = matricula;
+    public ProfessorDTO(Long id, String nome, String cpf, String fone, Boolean ativo) {
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.fone = fone;
@@ -43,19 +43,15 @@ public class ProfessorDTO {
         this.ativo = ativo;
     }
 
-    public ProfessorDTO(Long matricula, String nome, String cpf) {
+    public ProfessorDTO(Long id, String nome, String cpf) {
 
-        this.matricula = matricula;
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
     }
 
-    public Long getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(Long matricula) {
-        this.matricula = matricula;
+    public Long getId() {
+        return id;
     }
 
     public String getNome() {
