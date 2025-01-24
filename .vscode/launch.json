@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [  
+    
+    /*{
+        "name": "Attach to Quarkus",
+        "type": "java",
+        "request": "attach",
+        "hostName": "localhost",
+        "port": 8080
+    },*/
+    {
+        "preLaunchTask": "quarkus:dev",
+        "type": "java",
+        "request": "attach",
+        "hostName": "localhost",
+        "name": "Debug Quarkus application",
+        "port": 5005
+    }
+]
+}

@@ -19,7 +19,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@Path("/alunos")
+@Path("/v1/alunos")
 @ApplicationScoped
 public class AlunoController {
 
@@ -44,6 +44,27 @@ public class AlunoController {
     public Response getAlunos() {
 
         return Response.ok(alunoService.getAlunos()).build();
+    }
+
+
+    /**
+     * O {@link Retry} garante que, em caso de erro, o método tentará ser executado
+     * mais uma vez.
+     *
+     * O {@link CircuitBreaker} Caso ocorram vários erros consecutivos, o
+     * serviço para de responder imediatamente por
+     * algum tempo enquanto se recupera.
+     *
+     *
+     */
+    @GET
+    @Path("/{matricula}")
+    @CircuitBreaker
+    @Retry(maxRetries = 1)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAlunoDetalhado(@PathParam(value = "matricula") Long matricula) {
+
+        return Response.ok(alunoService.getAlunoByMatricula(matricula)).build();
     }
 
     /**
