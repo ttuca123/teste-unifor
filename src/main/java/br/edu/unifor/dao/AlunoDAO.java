@@ -16,7 +16,7 @@ public class AlunoDAO implements PanacheRepository<Aluno> {
 
     public List<Aluno> findAllAlunos() {
 
-        PanacheQuery<Aluno> alunos = findAll();   
+        PanacheQuery<Aluno> alunos = findAll();
 
         return alunos.list();
     }
@@ -69,9 +69,7 @@ public class AlunoDAO implements PanacheRepository<Aluno> {
         Aluno aluno = findById(matricula);
 
         if (null != aluno) {
-
-            aluno.setAtivo(false);
-            persist(aluno);
+            delete(aluno);
         }
     }
 
