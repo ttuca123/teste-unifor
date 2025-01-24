@@ -17,9 +17,6 @@ public class CursoDTO {
     @JsonProperty("descricao")
     private String descricao;
 
-    @JsonProperty("ativo")
-    private Boolean ativo;
-
     public CursoDTO() {
 
     }
@@ -53,14 +50,6 @@ public class CursoDTO {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public Boolean getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(Boolean ativo) {
-        this.ativo = ativo;
     }
 
 }
