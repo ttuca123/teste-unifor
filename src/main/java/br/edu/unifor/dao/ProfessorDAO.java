@@ -6,8 +6,6 @@ import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
-
-import java.util.Date;
 import java.util.List;
 
 @ApplicationScoped
@@ -21,9 +19,9 @@ public class ProfessorDAO implements PanacheRepository<Professor> {
     }
 
 
-    public Professor findProfessorById(Long matricula) {
+    public Professor findProfessorById(Long id) {
 
-        return findById(matricula);
+        return findById(id);
     }
 
     @Transactional
@@ -54,9 +52,9 @@ public class ProfessorDAO implements PanacheRepository<Professor> {
     }
 
     @Transactional
-    public void excluirProfessor(Long matricula) {
+    public void excluirProfessor(Long id) {
 
-        Professor Professor = findById(matricula);
+        Professor Professor = findById(id);
 
         if (null != Professor) {
             delete(Professor);
