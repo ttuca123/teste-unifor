@@ -35,7 +35,7 @@ public class AlunoDAO implements PanacheRepository<Aluno> {
                 alunoDTO.getCpf(),
                 new Date(),
                 alunoDTO.getFone(),
-                alunoDTO.getAtivo());
+                true);
 
         persist(aluno);
 

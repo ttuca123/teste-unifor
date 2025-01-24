@@ -34,21 +34,21 @@ public class UsuarioDAO implements PanacheRepository<Usuario> {
                 usuarioDTO.getNome(),
                 usuarioDTO.getCpf(),
                 usuarioDTO.getFone(),
-                usuarioDTO.getAtivo());
+                true);
 
         persist(usuario);
 
     }
 
     @Transactional
-    public Usuario atualizar(Long matricula, AlunoDTO alunoDTO) {
+    public Usuario atualizar(Long matricula, UsuarioDTO usuarioDTO) {
 
         Usuario usuario = findById(matricula);
 
         if (null != usuario) {
 
-            usuario.setNome(alunoDTO.getNome());
-            usuario.setFone(alunoDTO.getFone());
+            usuario.setNome(usuarioDTO.getNome());
+            usuario.setFone(usuarioDTO.getFone());
             persist(usuario);
         }
         return usuario;
