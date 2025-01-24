@@ -54,13 +54,6 @@ public class UsuarioDAO implements PanacheRepository<Usuario> {
         return usuario;
     }
 
-    /**
-     * Realizar apenas a exclusão lógica dos registros para manter histórico
-     * de notas e outros relacionamentos desse aluno
-     * 
-     * @param id
-     * @return
-     */
 
     @Transactional
     public void excluir(Long id) {

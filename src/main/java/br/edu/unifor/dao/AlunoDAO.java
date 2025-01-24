@@ -30,7 +30,7 @@ public class AlunoDAO implements PanacheRepository<Aluno> {
     @Transactional
     public void inserirAluno(AlunoDTO alunoDTO) {
 
-        Aluno aluno = new Aluno(alunoDTO.getMatricula(),
+        Aluno aluno = new Aluno(
                 alunoDTO.getNome(),
                 alunoDTO.getCpf(),
                 new Date(),
@@ -55,13 +55,7 @@ public class AlunoDAO implements PanacheRepository<Aluno> {
         return aluno;
     }
 
-    /**
-     * Realizar apenas a exclusão lógica dos registros para manter histórico
-     * de notas e outros relacionamentos desse aluno
-     * 
-     * @param matricula
-     * @return
-     */
+
 
     @Transactional
     public void excluirAluno(Long matricula) {
