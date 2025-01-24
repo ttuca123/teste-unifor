@@ -26,6 +26,14 @@ public class Aluno{
         this.ativo = ativo;
     }
 
+    public Aluno( String nome, String cpf, Date dataAdmissao, String fone, Boolean ativo) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dataAdmissao = dataAdmissao;
+        this.fone = fone;
+        this.ativo = ativo;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "matricula")
