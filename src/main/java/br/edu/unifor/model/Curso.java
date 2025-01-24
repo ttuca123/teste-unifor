@@ -9,6 +9,15 @@ import jakarta.persistence.Id;
 @Entity
 public class Curso {
 
+    public Curso() {
+
+    }
+
+    public Curso (String nome, String descricao){
+        this.nome=nome;
+        this.descricao = descricao;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_curso")
