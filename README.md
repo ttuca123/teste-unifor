@@ -32,36 +32,36 @@ Antes de começar, você precisa ter os seguintes softwares instalados na sua m�
 
 Clone este repositório em sua máquina local:
 
-```bash
-git clone https://github.com/ttuca123/teste-unifor.git
-cd teste-unifor
+``` git clone https://github.com/ttuca123/teste-unifor.git ```
+
+```cd teste-unifor ```
 
 2. Rodando o projeto com Maven
 Se você quiser rodar o projeto diretamente com Maven (sem Docker), execute o seguinte comando:
 
-./mvnw compile quarkus:dev
+```./mvnw compile quarkus:dev```
 
 Isso irá compilar o projeto e inicializar o Quarkus no modo de desenvolvimento, acessível em http://localhost:8080.
 
 3. Criando a imagem Docker
 Para criar a imagem Docker do seu projeto, basta rodar o seguinte comando:
 
-./mvnw clean package -Dquarkus.container-image.build=true
+```./mvnw clean package -Dquarkus.container-image.build=true```
 
 Isso irá construir a imagem Docker definida no projeto. Após o build, você pode rodar a aplicação dentro de um container Docker.
 
 4. Rodando a aplicação no Docker
 Depois de gerar a imagem Docker, execute o seguinte comando para rodar a aplicação:
 
-docker run -i -t quarkus-docker:latest
+```docker run -i -t quarkus-docker:latest```
 
 Isso irá iniciar o container e você poderá acessar a aplicação em http://localhost:8080.
 
-📦 Estrutura do Projeto
-src/main/java: Contém o código fonte do seu serviço Quarkus.
-src/main/resources: Contém arquivos de configuração e outros recursos.
-Dockerfile: Arquivo para construir a imagem Docker do projeto.
-pom.xml: Arquivo de configuração Maven, incluindo dependências Quarkus e Docker.
+📦 Estrutura do Projeto:
+- src/main/java: Contém o código fonte do seu serviço Quarkus.
+- src/main/resources: Contém arquivos de configuração e outros recursos.
+- Dockerfile: Arquivo para construir a imagem Docker do projeto.
+- pom.xml: Arquivo de configuração Maven, incluindo dependências Quarkus e Docker.
 
 🧑‍💻 Desenvolvimento
 Caso deseje contribuir ou realizar modificações no projeto, basta clonar o repositório e seguir os passos descritos acima para rodar a aplicação localmente. Para criar uma nova feature ou corrigir algum bug, basta submeter um pull request.
@@ -69,7 +69,7 @@ Caso deseje contribuir ou realizar modificações no projeto, basta clonar o rep
 🤖 Testes
 Você pode rodar os testes do Quarkus localmente com o seguinte comando:
 
-./mvnw test
+```./mvnw test```
 
 Isso irá executar todos os testes definidos no seu projeto.
 
