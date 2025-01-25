@@ -28,7 +28,7 @@ Antes de começar, você precisa ter os seguintes softwares instalados na sua m�
 
 ## 💻 Como rodar localmente
 
-### 1. Clonando o repositório
+### 1 Clonando o repositório
 
 Clone este repositório em sua máquina local:
 
@@ -36,26 +36,38 @@ Clone este repositório em sua máquina local:
 
 ```cd teste-unifor ```
 
-2. Rodando o projeto com Maven
+1.2 Rodando o projeto com Maven
 Se você quiser rodar o projeto diretamente com Maven (sem Docker), execute o seguinte comando:
 
 ```./mvnw compile quarkus:dev```
 
 Isso irá compilar o projeto e inicializar o Quarkus no modo de desenvolvimento, acessível em http://localhost:8080.
 
-3. Criando a imagem Docker
+1.3. Criando a imagem Docker
 Para criar a imagem Docker do seu projeto, basta rodar o seguinte comando:
 
 ```./mvnw clean package -Dquarkus.container-image.build=true```
 
 Isso irá construir a imagem Docker definida no projeto. Após o build, você pode rodar a aplicação dentro de um container Docker.
 
-4. Rodando a aplicação no Docker
+1.4. Rodando a aplicação no Docker
 Depois de gerar a imagem Docker, execute o seguinte comando para rodar a aplicação:
 
 ```docker run -i -t quarkus-docker:latest```
 
 Isso irá iniciar o container e você poderá acessar a aplicação em http://localhost:8080.
+
+### 2 Configurando o keycloak
+
+2.1 Execute a aplicação do keycloak no Docker na porta **8180** para não gerar conflito com a porta da aplicação **8080**
+Utilize o seguinte comando para rodar a aplicação do Keycloak via Docker:
+
+```docker run -p 8180:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:26.1.0 start-dev```
+
+2.2 Execute o login no KeyCloak acessando a url *http://localhost:8180* utilizando as seguintes credenciais
+- login: **admin**
+- password: **admin**
+
 
 📦 Estrutura do Projeto:
 - src/main/java: Contém o código fonte do seu serviço Quarkus.
