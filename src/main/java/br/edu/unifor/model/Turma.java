@@ -19,7 +19,7 @@ public class Turma {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_turma")
+    @Column(name = "id")
     private Long idTurma;
 
     @Column(name = "descricao")

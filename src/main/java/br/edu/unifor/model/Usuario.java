@@ -7,8 +7,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import java.util.Date;
-
 @Entity
 @Cacheable
 public class Usuario {
@@ -18,7 +16,7 @@ public class Usuario {
     }
 
     public Usuario(Long id, String nome, String cpf, String fone, Boolean ativo) {
-        this.idUsuario = id;
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.fone = fone;
@@ -28,8 +26,8 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario")
-    private Long idUsuario;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "nome")
     private String nome;
@@ -43,8 +41,8 @@ public class Usuario {
     @Column(name = "ativo")
     private Boolean ativo;
 
-    public Long getIdUsuario() {
-        return idUsuario;
+    public Long getId() {
+        return id;
     }
 
     public String getNome() {

@@ -25,7 +25,7 @@ public class UsuarioService {
 
     public List<UsuarioDTO> getUsuarios() {
 
-        return usuarioDAO.findAllAlunos().stream().map(usuario -> new UsuarioDTO(usuario.getIdUsuario(), usuario.getNome(),
+        return usuarioDAO.findAllAlunos().stream().map(usuario -> new UsuarioDTO(usuario.getId(), usuario.getNome(),
                 usuario.getCpf(), usuario.getFone(), usuario.getAtivo())).collect(Collectors.toList());
     }
 
@@ -34,7 +34,7 @@ public class UsuarioService {
 
         Usuario usuario = usuarioDAO.findUsuarioById(matricula);
 
-        return new UsuarioDTO(usuario.getIdUsuario(), usuario.getNome(),
+        return new UsuarioDTO(usuario.getId(), usuario.getNome(),
                 usuario.getCpf(), usuario.getFone(), usuario.getAtivo());
     }
 
