@@ -41,7 +41,7 @@ Se você quiser rodar o projeto diretamente com Maven (sem Docker), execute o se
 
 ```./mvnw compile quarkus:dev```
 
-Isso irá compilar o projeto e inicializar o Quarkus no modo de desenvolvimento, acessível em http://localhost:8080.
+Isso irá compilar o projeto e inicializar o Quarkus no modo de desenvolvimento, acessível em http://localhost:8180.
 
 1.3. Criando a imagem Docker
 Para criar a imagem Docker do seu projeto, basta rodar o seguinte comando:
@@ -55,16 +55,16 @@ Depois de gerar a imagem Docker, execute o seguinte comando para rodar a aplica�
 
 ```docker run -i -t quarkus-docker:latest```
 
-Isso irá iniciar o container e você poderá acessar a aplicação em http://localhost:8080.
+Isso irá iniciar o container e você poderá acessar a aplicação em http://localhost:8180.
 
 ### 2 Configurando o keycloak
 
-2.1 Execute a aplicação do keycloak no Docker na porta **8180** para não gerar conflito com a porta da aplicação **8080**
+2.1 Execute a aplicação do keycloak no Docker na porta **8080** para não gerar conflito com a porta da aplicação **8180**
 Utilize o seguinte comando para rodar a aplicação do Keycloak via Docker:
 
-```docker run -p 8180:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:26.1.0 start-dev```
+```docker run -p 8080:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:26.1.0 start-dev```
 
-2.2 Execute o login no KeyCloak acessando a url *http://localhost:8180* utilizando as seguintes credenciais
+2.2 Execute o login no KeyCloak acessando a url *http://localhost:8080* utilizando as seguintes credenciais
 - login: **admin**
 - password: **admin**
 
