@@ -9,9 +9,17 @@ import jakarta.persistence.Id;
 @Entity
 public class Turma {
 
+    public Turma() {
+
+    }
+
+    public Turma(String descricao) {
+        this.descricao = descricao;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_turma")
+    @Column(name = "id")
     private Long idTurma;
 
     @Column(name = "descricao")

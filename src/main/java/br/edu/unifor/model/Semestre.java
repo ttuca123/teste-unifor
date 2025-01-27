@@ -14,7 +14,7 @@ public class Semestre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_semestre")
+    @Column(name = "id")
     private Long idSemestre;
 
     @Column(name = "descricao")

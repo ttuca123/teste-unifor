@@ -14,10 +14,22 @@ import jakarta.persistence.TemporalType;
 @Entity
 public class Professor {
 
+    public Professor() {
+
+    }
+
+    public Professor(String nome, String cpf, String fone, Boolean ativo) {
+
+        this.nome = nome;
+        this.cpf = cpf;
+        this.fone = fone;
+        this.ativo = ativo;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "matricula")
-    private Long matricula;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "nome")
     private String nome;
@@ -35,8 +47,8 @@ public class Professor {
     @Column(name = "ativo")
     private Boolean ativo;
 
-    public Long getMatricula() {
-        return matricula;
+    public Long getId() {
+        return id;
     }
 
     public String getNome() {

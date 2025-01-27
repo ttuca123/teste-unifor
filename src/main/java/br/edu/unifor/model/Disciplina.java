@@ -1,5 +1,6 @@
 package br.edu.unifor.model;
 
+import br.edu.unifor.dto.DisciplinaDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,10 +10,26 @@ import jakarta.persistence.Id;
 @Entity
 public class Disciplina {
 
+    public Disciplina() {
+
+    }
+
+    public Disciplina (String nome, Integer creditos){
+        this.nome=nome;
+        this.creditos = creditos;
+    }
+
+    public Disciplina (Long id,String nome, Integer creditos, Boolean ativo){
+        this.id = id;
+        this.nome=nome;
+        this.creditos = creditos;
+        this.ativo = ativo;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_disciplina")
-    private Long idDisciplina;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "nome")
     private String nome;
@@ -23,8 +40,8 @@ public class Disciplina {
     @Column(name = "ativo")
     private Boolean ativo;
 
-    public Long getIdDisciplina() {
-        return idDisciplina;
+    public Long getId() {
+        return id;
     }
 
     public String getNome() {

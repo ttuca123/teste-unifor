@@ -11,7 +11,28 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Entity
-public class Aluno {
+public class Aluno{
+
+    public Aluno() {
+
+    }
+
+    public Aluno(Long matricula, String nome, String cpf, Date dataAdmissao, String fone, Boolean ativo) {
+        this.matricula = matricula;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dataAdmissao = dataAdmissao;
+        this.fone = fone;
+        this.ativo = ativo;
+    }
+
+    public Aluno( String nome, String cpf, Date dataAdmissao, String fone, Boolean ativo) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dataAdmissao = dataAdmissao;
+        this.fone = fone;
+        this.ativo = ativo;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

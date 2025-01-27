@@ -11,15 +11,28 @@ import jakarta.persistence.Id;
 @Cacheable
 public class Usuario {
 
+    public Usuario() {
+
+    }
+
+    public Usuario(Long id, String nome, String cpf, String fone, Boolean ativo) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.fone = fone;
+        this.ativo = ativo;
+    }
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario")
-    private Long idUsuario;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "cpf")
+    @Column(name = "cpf", unique = true)
     private String cpf;
 
     @Column(name = "fone")
@@ -28,8 +41,8 @@ public class Usuario {
     @Column(name = "ativo")
     private Boolean ativo;
 
-    public Long getIdUsuario() {
-        return idUsuario;
+    public Long getId() {
+        return id;
     }
 
     public String getNome() {

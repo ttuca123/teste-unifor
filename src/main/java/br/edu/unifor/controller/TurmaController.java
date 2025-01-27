@@ -1,31 +1,21 @@
 package br.edu.unifor.controller;
 
-import java.util.List;
-
-import jakarta.annotation.security.RolesAllowed;
+import br.edu.unifor.dto.TurmaDTO;
+import br.edu.unifor.service.TurmaService;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.Retry;
 
-import br.edu.unifor.dto.AlunoDTO;
-import br.edu.unifor.service.AlunoService;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-
-@Path("/v1/alunos")
+@Path("/v1/turmas")
 @ApplicationScoped
-public class AlunoController {
+public class TurmaController {
 
     @Inject
-    public AlunoService alunoService;
+    public TurmaService turmaService;
 
     /**
      * O {@link Retry} garante que, em caso de erro, o método tentará ser executado
@@ -42,9 +32,9 @@ public class AlunoController {
     @CircuitBreaker
     @Retry(maxRetries = 1)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAlunos() {
+    public Response getTurmas() {
 
-        return Response.ok(alunoService.getAlunos()).build();
+        return Response.ok(turmaService.getTurmas()).build();
     }
 
 
@@ -59,13 +49,13 @@ public class AlunoController {
      *
      */
     @GET
-    @Path("/{matricula}")
+    @Path("/{id}")
     @CircuitBreaker
     @Retry(maxRetries = 1)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAlunoDetalhado(@PathParam(value = "matricula") Long matricula) {
+    public Response getTurmaDetalhada(@PathParam(value = "id") Long id) {
 
-        return Response.ok(alunoService.getAlunoByMatricula(matricula)).build();
+        return Response.ok(turmaService.getTurmaById(id)).build();
     }
 
     /**
@@ -82,9 +72,9 @@ public class AlunoController {
     @CircuitBreaker
     @Retry(maxRetries = 3)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response inserirAluno(AlunoDTO alunoDTO) {
+    public Response inserirTurma(TurmaDTO turmaDTO) {
 
-        alunoService.inserirAluno(alunoDTO);
+        turmaService.inserirTurma(turmaDTO);
 
         return Response.ok().build();
     }
@@ -100,15 +90,15 @@ public class AlunoController {
      *
      */
     @PUT
-    @Path("/{matricula}")
+    @Path("/{id}")
     @CircuitBreaker
     @Retry(maxRetries = 3)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response atualizarAluno(@PathParam(value = "matricula") Long matricula, AlunoDTO alunoDTO) {
+    public Response atualizarTurma(@PathParam(value = "id") Long id, TurmaDTO turmaDTO) {
 
-        alunoDTO = alunoService.atualizarAluno(matricula, alunoDTO);
+        turmaDTO = turmaService.atualizarTurma(id, turmaDTO);
 
-        return Response.ok(alunoDTO).build();
+        return Response.ok(turmaDTO).build();
     }
 
     /**
@@ -122,13 +112,13 @@ public class AlunoController {
      *
      */
     @DELETE
-    @Path("/{matricula}")
+    @Path("/{id}")
     @CircuitBreaker
     @Retry(maxRetries = 3)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response excluirAluno(@PathParam(value = "matricula") Long matricula) {
+    public Response excluirTurma(@PathParam(value = "id") Long id) {
 
-        alunoService.excluirAluno(matricula);
+        turmaService.excluirTurma(id);
 
         return Response.ok().build();
     }

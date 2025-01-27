@@ -1,31 +1,24 @@
 package br.edu.unifor.controller;
 
-import java.util.List;
-
+import br.edu.unifor.dto.CursoDTO;
+import br.edu.unifor.dto.DisciplinaDTO;
+import br.edu.unifor.service.CursoService;
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.Retry;
 
-import br.edu.unifor.dto.AlunoDTO;
-import br.edu.unifor.service.AlunoService;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-
-@Path("/v1/alunos")
+@Path("/v1/cursos")
+@RolesAllowed({"admin", "coord"})
 @ApplicationScoped
-public class AlunoController {
+public class CursoController {
 
     @Inject
-    public AlunoService alunoService;
+    public CursoService cursoService;
 
     /**
      * O {@link Retry} garante que, em caso de erro, o método tentará ser executado
@@ -38,13 +31,12 @@ public class AlunoController {
      * 
      */
     @GET
-    @Path("")
     @CircuitBreaker
     @Retry(maxRetries = 1)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAlunos() {
+    public Response getCursos() {
 
-        return Response.ok(alunoService.getAlunos()).build();
+        return Response.ok(cursoService.getCursos()).build();
     }
 
 
@@ -59,13 +51,14 @@ public class AlunoController {
      *
      */
     @GET
-    @Path("/{matricula}")
+    @Path("/{id}")
     @CircuitBreaker
     @Retry(maxRetries = 1)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAlunoDetalhado(@PathParam(value = "matricula") Long matricula) {
+    public Response getCursoDetalhado(@PathParam(value = "id") Long id) {
 
-        return Response.ok(alunoService.getAlunoByMatricula(matricula)).build();
+
+        return Response.ok(cursoService.getCursoById(id)).build();
     }
 
     /**
@@ -82,9 +75,9 @@ public class AlunoController {
     @CircuitBreaker
     @Retry(maxRetries = 3)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response inserirAluno(AlunoDTO alunoDTO) {
+    public Response inserirCurso(CursoDTO cursoDTO) {
 
-        alunoService.inserirAluno(alunoDTO);
+        cursoService.inserirCurso(cursoDTO);
 
         return Response.ok().build();
     }
@@ -100,15 +93,16 @@ public class AlunoController {
      *
      */
     @PUT
-    @Path("/{matricula}")
+    @Path("/{id}")
     @CircuitBreaker
     @Retry(maxRetries = 3)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response atualizarAluno(@PathParam(value = "matricula") Long matricula, AlunoDTO alunoDTO) {
+    public Response atualizarCurso(@PathParam(value = "id") Long id, CursoDTO cursoDTO) {
 
-        alunoDTO = alunoService.atualizarAluno(matricula, alunoDTO);
 
-        return Response.ok(alunoDTO).build();
+        cursoDTO = cursoService.atualizarCurso(id, cursoDTO);
+
+        return Response.ok(cursoDTO).build();
     }
 
     /**
@@ -122,13 +116,34 @@ public class AlunoController {
      *
      */
     @DELETE
-    @Path("/{matricula}")
+    @Path("/{id}")
     @CircuitBreaker
     @Retry(maxRetries = 3)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response excluirAluno(@PathParam(value = "matricula") Long matricula) {
+    public Response excluirCurso(@PathParam(value = "id") Long id) {
 
-        alunoService.excluirAluno(matricula);
+        cursoService.excluirCurso(id);
+
+        return Response.ok().build();
+    }
+
+    /**
+     * O {@link Retry} garante que, em caso de erro, o método tentará ser executado
+     * mais uma vez.
+     *
+     * O {@link CircuitBreaker} Caso ocorram vários erros consecutivos, o
+     * serviço para de responder imediatamente por
+     * algum tempo enquanto se recupera.
+     *
+     *
+     */
+    @POST
+    @CircuitBreaker
+    @Retry(maxRetries = 3)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response inserirMatrizCurricular(CursoDTO cursoDTO) {
+
+        cursoService.inserirCurso(cursoDTO);
 
         return Response.ok().build();
     }
