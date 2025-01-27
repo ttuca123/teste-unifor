@@ -9,14 +9,13 @@ import org.keycloak.admin.client.KeycloakBuilder;
 public class KeyCloakProducer {
 
     @Produces
-    public Keycloak produceKeycloak(String authorization) {
+    public Keycloak produceKeycloak() {
         return KeycloakBuilder.builder()
                 .serverUrl("http://localhost:8080")
                 .realm("unifor")
                 .username("admin")
                 .password("admin")
                 .clientId("teste-unifor")
-                //.authorization(authorization)
                 .clientSecret("BeolEfCE1ZHDQksG6aK7i0JsNs3PuQcv")
                 .build();
     }
