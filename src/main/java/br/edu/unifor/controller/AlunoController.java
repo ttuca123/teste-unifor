@@ -2,6 +2,7 @@ package br.edu.unifor.controller;
 
 import java.util.List;
 
+import jakarta.annotation.security.RolesAllowed;
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.Retry;
 
