@@ -11,6 +11,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.auth.LoginConfig;
 import org.keycloak.admin.client.Keycloak;
+import org.keycloak.representations.AccessTokenResponse;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 
@@ -35,11 +36,11 @@ public class AuthController {
     @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
-    public String login(AuthDTO user) {
+    public AccessTokenResponse login(AuthDTO user) {
 
        Keycloak keycloak = keyCloakProducer.produceKeycloak(user);
 
-        return keycloak.tokenManager().getAccessToken().getToken();
+        return keycloak.tokenManager().getAccessToken();
     }
 
 
