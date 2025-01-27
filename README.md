@@ -68,6 +68,17 @@ Utilize o seguinte comando para rodar a aplicação do Keycloak via Docker:
 - login: **admin**
 - password: **admin**
 
+📦 Estrutura de Permissões:
+- Visão de administrador **admin**:
+  - Incluir, excluir, atualizar e visualizar usuários
+- Visão de coordenador de cursos **coord**:
+  - Incluir, excluir, atualizar e visualizar os semestres, cursos e disciplinas;
+  - Realizar a montagem da matriz curricular.
+- Visão de professor **prof**
+  - Visualizar a matriz curricular.
+- Visão de aluno **aluno**
+  - Visualizar a matriz curricular.
+
 
 📦 Estrutura do Projeto:
 - src/main/java: Contém o código fonte do seu serviço Quarkus.
