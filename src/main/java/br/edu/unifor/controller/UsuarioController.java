@@ -2,6 +2,7 @@ package br.edu.unifor.controller;
 
 import br.edu.unifor.dto.UsuarioDTO;
 import br.edu.unifor.service.UsuarioService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -11,6 +12,7 @@ import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.Retry;
 
 @Path("/v1/usuarios")
+@RolesAllowed({"admin"})
 @ApplicationScoped
 public class UsuarioController {
 

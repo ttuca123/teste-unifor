@@ -2,6 +2,7 @@ package br.edu.unifor.controller;
 
 import br.edu.unifor.dto.DisciplinaDTO;
 import br.edu.unifor.service.DisciplinaService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -12,6 +13,7 @@ import org.eclipse.microprofile.faulttolerance.Retry;
 
 @Path("/v1/disciplinas")
 @ApplicationScoped
+@RolesAllowed({"admin", "coord"})
 public class DisciplinaController {
 
     @Inject

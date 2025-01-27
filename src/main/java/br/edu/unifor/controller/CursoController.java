@@ -3,6 +3,7 @@ package br.edu.unifor.controller;
 import br.edu.unifor.dto.CursoDTO;
 import br.edu.unifor.dto.DisciplinaDTO;
 import br.edu.unifor.service.CursoService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -12,6 +13,7 @@ import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.Retry;
 
 @Path("/v1/cursos")
+@RolesAllowed({"admin", "coord"})
 @ApplicationScoped
 public class CursoController {
 
@@ -29,7 +31,6 @@ public class CursoController {
      * 
      */
     @GET
-    @Path("")
     @CircuitBreaker
     @Retry(maxRetries = 1)
     @Produces(MediaType.APPLICATION_JSON)
@@ -122,6 +123,27 @@ public class CursoController {
     public Response excluirCurso(@PathParam(value = "id") Long id) {
 
         cursoService.excluirCurso(id);
+
+        return Response.ok().build();
+    }
+
+    /**
+     * O {@link Retry} garante que, em caso de erro, o método tentará ser executado
+     * mais uma vez.
+     *
+     * O {@link CircuitBreaker} Caso ocorram vários erros consecutivos, o
+     * serviço para de responder imediatamente por
+     * algum tempo enquanto se recupera.
+     *
+     *
+     */
+    @POST
+    @CircuitBreaker
+    @Retry(maxRetries = 3)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response inserirMatrizCurricular(CursoDTO cursoDTO) {
+
+        cursoService.inserirCurso(cursoDTO);
 
         return Response.ok().build();
     }
