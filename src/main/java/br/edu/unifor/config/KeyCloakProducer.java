@@ -1,5 +1,6 @@
 package br.edu.unifor.config;
 
+import br.edu.unifor.dto.AuthDTO;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.Produces;
 import org.keycloak.admin.client.Keycloak;
@@ -15,8 +16,21 @@ public class KeyCloakProducer {
                 .realm("unifor")
                 .username("admin")
                 .password("admin")
-                .clientId("teste-unifor")
-                .clientSecret("BeolEfCE1ZHDQksG6aK7i0JsNs3PuQcv")
+                .clientId("testeunifor")
+                .clientSecret("w3Mw76dsi3vWSRQwwbClGBWgmpOS5VfY")
+                .build();
+    }
+
+
+    @Produces
+    public Keycloak produceKeycloak(AuthDTO authDTO) {
+        return KeycloakBuilder.builder()
+                .serverUrl("http://localhost:8080")
+                .realm("unifor")
+                .username(authDTO.getUser())
+                .password(authDTO.getPassword())
+                .clientId("testeunifor")
+                .clientSecret("w3Mw76dsi3vWSRQwwbClGBWgmpOS5VfY")
                 .build();
     }
 
