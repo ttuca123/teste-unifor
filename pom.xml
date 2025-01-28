@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>br.edu.unifor</groupId>
   <artifactId>teste</artifactId>
   <version>0.0.1</version>
-  <properties>    
-    <lombok.version>1.18.10</lombok.version>
+  <properties>
     <compiler-plugin.version>3.13.0</compiler-plugin.version>
-    <maven.compiler.release>17</maven.compiler.release>
     <java-version>17</java-version>
+    <lombok.version>1.18.10</lombok.version>
+    <maven.compiler.release>17</maven.compiler.release>
+    <maven.compiler.source>${java-version}</maven.compiler.source>
+    <maven.compiler.target>${java-version}</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
     <quarkus.platform.version>3.17.7</quarkus.platform.version>
-    <maven.compiler.source>${java-version}</maven.compiler.source>
-		<maven.compiler.target>${java-version}</maven.compiler.target>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.5.0</surefire-plugin.version>
   </properties>
@@ -34,22 +35,22 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-arc</artifactId>
-    </dependency>   
-     <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-jdbc-postgresql</artifactId>
-    </dependency>    
-    <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-hibernate-orm-panache</artifactId>
     </dependency>
     <dependency>
-			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-smallrye-fault-tolerance</artifactId>
-		</dependency>    
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jdbc-postgresql</artifactId>
+    </dependency>
     <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-resteasy-jackson</artifactId>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-hibernate-orm-panache</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-fault-tolerance</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-jackson</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -64,8 +65,14 @@
       <artifactId>keycloak-admin-client</artifactId>
       <version>26.0.4</version>
     </dependency>
-
-
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-container-image-docker</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-container-image-buildpack</artifactId>
+    </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
@@ -131,8 +138,7 @@
             </configuration>
           </execution>
         </executions>
-      </plugin>      
-
+      </plugin>
     </plugins>
   </build>
   <profiles>
