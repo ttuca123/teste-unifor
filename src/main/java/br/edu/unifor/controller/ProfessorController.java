@@ -11,6 +11,7 @@ import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.Retry;
 
+
 @Path("/v1/professores")
 @ApplicationScoped
 @RolesAllowed({"admin", "coord"})

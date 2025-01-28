@@ -13,7 +13,7 @@ public class KeyCloakProducer {
     public Keycloak produceKeycloak() {
         return KeycloakBuilder.builder()
                 .serverUrl("http://localhost:8080")
-                .realm("unifor")
+                .realm("master")
                 .username("admin")
                 .password("admin")
                 .clientId("testeunifor")
@@ -26,7 +26,7 @@ public class KeyCloakProducer {
     public Keycloak produceKeycloak(AuthDTO authDTO) {
         return KeycloakBuilder.builder()
                 .serverUrl("http://localhost:8080")
-                .realm("unifor")
+                .realm("master")
                 .username(authDTO.getUser())
                 .password(authDTO.getPassword())
                 .clientId("testeunifor")

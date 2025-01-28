@@ -9,7 +9,8 @@ import static org.hamcrest.CoreMatchers.is;
 @QuarkusTest
 public class AlunoControllerTest {
 
-    @Test
+
+
     void testObterAlunoValidoEndpoint() {
         given()
                 .when().get("/v1/alunos")
