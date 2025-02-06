@@ -40,7 +40,15 @@ public class AuthController {
 
        Keycloak keycloak = keyCloakProducer.produceKeycloak(user);
 
-        return keycloak.tokenManager().getAccessToken();
+        AccessTokenResponse token = null;
+        try {
+                token = keycloak.tokenManager().getAccessToken();
+            } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return token;
+
     }
 
 

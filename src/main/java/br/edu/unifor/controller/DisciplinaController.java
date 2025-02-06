@@ -13,7 +13,7 @@ import org.eclipse.microprofile.faulttolerance.Retry;
 
 @Path("/v1/disciplinas")
 @ApplicationScoped
-@RolesAllowed({"admin", "coord"})
+//@RolesAllowed({"admin", "coord"})
 public class DisciplinaController {
 
     @Inject

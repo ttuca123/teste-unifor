@@ -13,7 +13,7 @@ import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.Retry;
 
 @Path("/v1/cursos")
-@RolesAllowed({"admin", "coord"})
+//@RolesAllowed({"admin", "coord"})
 @ApplicationScoped
 public class CursoController {
 

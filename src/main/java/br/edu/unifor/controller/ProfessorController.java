@@ -14,7 +14,7 @@ import org.eclipse.microprofile.faulttolerance.Retry;
 
 @Path("/v1/professores")
 @ApplicationScoped
-@RolesAllowed({"admin", "coord"})
+//@RolesAllowed({"admin", "coord"})
 public class ProfessorController {
 
     @Inject
