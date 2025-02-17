@@ -56,6 +56,7 @@ Isso irá construir a imagem Docker definida no projeto. Após o build, você po
 Depois de gerar a imagem Docker, execute o seguinte comando para rodar a aplicação:
 
 ```docker run -i -d --network net-unifor --rm -p 8180:8180 unifor-sisacad:v1.0.0 ```
+
 ou rode diretamente puxando a aplicação do DockerHub
 
 ```docker run -i -d --network net-unifor --rm -p 8180:8180 ttuca123/testeunifor2025:latest```
