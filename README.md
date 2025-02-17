@@ -44,16 +44,26 @@ Se você quiser rodar o projeto diretamente com Maven (sem Docker), execute o se
 Isso irá compilar o projeto e inicializar o Quarkus no modo de desenvolvimento, acessível em http://localhost:8180.
 
 1.3. Criando a imagem Docker
-Para criar a imagem Docker do seu projeto, basta rodar o seguinte comando:
+Para criar a imagem Docker do seu projeto, basta rodar os seguintes comandos:
 
-```./mvnw clean package -Dquarkus.container-image.build=true```
+```mvn package -Dquarkus.package.type=legacy-jar ```
+
+``` docker build -f src/main/docker/Dockerfile.legacy-jar -t sisacad-unifor:v1.0.0 .```
 
 Isso irá construir a imagem Docker definida no projeto. Após o build, você pode rodar a aplicação dentro de um container Docker.
 
 1.4. Rodando a aplicação no Docker
 Depois de gerar a imagem Docker, execute o seguinte comando para rodar a aplicação:
 
-```docker run -i -t quarkus-docker:latest```
+```docker run -i -d --network net-unifor --rm -p 8180:8180 unifor-sisacad:v1.0.0 ```
+
+ou rode diretamente puxando a aplicação do DockerHub
+
+```docker run -i -d --network net-unifor --rm -p 8180:8180 ttuca123/testeunifor2025:latest```
+
+ou execute diretamente com o docker compose
+
+```docker compose up --build -d```
 
 Isso irá iniciar o container e você poderá acessar a aplicação em http://localhost:8180.
 
@@ -62,7 +72,7 @@ Isso irá iniciar o container e você poderá acessar a aplicação em http://lo
 2.1 Execute a aplicação do keycloak no Docker na porta **8080** para não gerar conflito com a porta da aplicação **8180**
 Utilize o seguinte comando para rodar a aplicação do Keycloak via Docker:
 
-```docker run -d -p 8080:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin -v keycloak-data:/opt/keycloak/data quay.io/keycloak/keycloak:26.1.0 start-dev```
+```>docker run -d -p 8080:8080 --name keycloak --network net-unifor -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin -v keycloak-data:/opt/keycloak/data quay.io/keycloak/keycloak:26.1.0 start-dev```
 
 2.2 Execute o login no KeyCloak acessando a url *http://localhost:8080* utilizando as seguintes credenciais
 - login: **admin**
