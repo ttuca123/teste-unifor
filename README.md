@@ -60,6 +60,10 @@ ou rode diretamente puxando a aplicação do DockerHub
 
 ```docker run -i -d --network net-unifor --rm -p 8180:8180 ttuca123/testeunifor2025:latest```
 
+ou execute diretamente com o docker compose
+
+```docker compose up --build -d```
+
 Isso irá iniciar o container e você poderá acessar a aplicação em http://localhost:8180.
 
 ### 2 Configurando o keycloak
