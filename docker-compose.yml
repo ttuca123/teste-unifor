@@ -1,24 +1,14 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  keycloak:
-    image: quay.io/keycloak/keycloak:26.1.0
-    container_name: keycloak
-    environment:
-      - KEYCLOAK_USER=admin
-      - KEYCLOAK_PASSWORD=admin
-      - DB_VENDOR=h2
+  teste-unifor:
+    image: ttuca123/testeunifor2025:latest
+    container_name: teste-unifor
+    networks:
+      - net-unifor
     ports:
-      - "8080:8080"
-
-  quarkus-app:
-    build: .
-    container_name: quarkus-app
-    ports:
-      - "8081:8081"
-    depends_on:
-      - keycloak
-    environment:
-      - QUARKUS_OIDC_AUTH_SERVER_URL=http://keycloak:8080/realms/unifor
-      - QUARKUS_OIDC_CLIENT_ID=teste-unifor
-      - QUARKUS_OIDC_CREDENTIALS_SECRET=OvaeyZokmz5EPOTK0U25gipe3XWzst95
+      - "8180:8180"
+    restart: always
+networks:
+  net-unifor:
+    external: true
