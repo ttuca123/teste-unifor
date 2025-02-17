@@ -1,40 +1,29 @@
-# Etapa 1: Construção da aplicação
-FROM maven:3.8.4-openjdk-17-slim AS build
+# Etapa 1: Build da aplicação nativa com GraalVM (usando uma imagem do OpenJDK)
+FROM ghcr.io/graalvm/graalvm-ce:latest
 
-# Definindo o diretório de trabalho
+# Instale dependências e ferramentas para compilar a aplicação nativa
+RUN gu install native-image
+
+# Defina o diretório de trabalho
+WORKDIR /workspace
+
+# Copie o código fonte e as dependências
+COPY . /workspace/
+
+# Compile o código para gerar o binário nativo
+RUN ./mvnw clean package -Pnative
+
+# Etapa 2: Imagem final com Distroless para rodar a aplicação nativa
+FROM gcr.io/distroless/java:11
+
+# Defina o diretório de trabalho
 WORKDIR /work/
 
-# Copiando o POM para o contêiner para garantir que o Maven tenha acesso a ele
-COPY ./pom.xml /work/
+# Copie o binário nativo gerado na etapa anterior
+COPY  /workspace/target/*-runner /work/app
 
-# Baixando as dependências do Maven (isso ajuda a evitar rebaixamento desnecessário de dependências)
-RUN mvn dependency:go-offline
+# Exponha a porta (ajuste de acordo com sua configuração)
+EXPOSE 8081
 
-# Copiando o código fonte para o contêiner
-COPY src /work/src/
-
-# Instalando as dependências do Maven e construindo o projeto
-RUN mvn clean package -DskipTests
-
-# Copiando os artefatos gerados para o contêiner
-COPY --chown=1001:root target/*-runner /work/
-
-EXPOSE 8080
-USER 1001
-
-CMD ["./application", "-Dquarkus.http.host=0.0.0.0"]
-
-# Etapa 2: Imagem para execução da aplicação
-FROM registry.access.redhat.com/ubi8/openjdk-17:1.15
-
-# Definindo o diretório de trabalho
-WORKDIR /app
-
-# Copiando o JAR gerado para a imagem final
-COPY --from=build /work/target/quarkus-app/quarkus-run.jar /app/quarkus-run.jar
-
-# Variáveis de ambiente necessárias para o Quarkus
-ENV JAVA_OPTIONS="-Dquarkus.http.host=0.0.0.0 -Dquarkus.http.port=8080"
-
-# Comando para executar a aplicação
-CMD ["java", "-jar", "/app/quarkus-run.jar"]
+# Execute o binário nativo
+CMD ["/work/app"]
