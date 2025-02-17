@@ -1,32 +1,24 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  quarkus:
-    build:
-      context: .
-      dockerfile: src/main/docker/Dockerfile.legacy-jar
-    image: quarkus/code-with-quarkus-legacy-jar
-    ports:
-      - "8180:8080"
-    environment:
-      - QUARKUS_HTTP_HOST=0.0.0.0
-      - QUARKUS_HTTP_PORT=8080
-      - KEYCLOAK_URL=http://keycloak:8080/auth
-    depends_on:
-      - keycloak
-    networks:
-      - quarkus-network
-
   keycloak:
     image: quay.io/keycloak/keycloak:26.1.0
+    container_name: keycloak
     environment:
-      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
-      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - DB_VENDOR=h2
     ports:
       - "8080:8080"
-    networks:
-      - quarkus-network
 
-networks:
-  quarkus-network:
-    driver: bridge
+  quarkus-app:
+    build: .
+    container_name: quarkus-app
+    ports:
+      - "8081:8081"
+    depends_on:
+      - keycloak
+    environment:
+      - QUARKUS_OIDC_AUTH_SERVER_URL=http://keycloak:8080/realms/unifor
+      - QUARKUS_OIDC_CLIENT_ID=teste-unifor
+      - QUARKUS_OIDC_CREDENTIALS_SECRET=OvaeyZokmz5EPOTK0U25gipe3XWzst95
