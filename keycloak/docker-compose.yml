@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.1.0
+    container_name: keycloak
+    environment:
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+    ports:
+      - "8080:8080"
+    volumes:
+      - keycloak-data:/opt/keycloak/data
+    networks:
+      - net-unifor
+    command: start-dev
+    restart: always
+
+networks:
+  net-unifor:
+    external: true
+
+volumes:
+  keycloak-data:
+    external: false
