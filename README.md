@@ -68,7 +68,7 @@ Isso irá iniciar o container e você poderá acessar a aplicação em http://lo
 2.1 Execute a aplicação do keycloak no Docker na porta **8080** para não gerar conflito com a porta da aplicação **8180**
 Utilize o seguinte comando para rodar a aplicação do Keycloak via Docker:
 
-```docker run -p 8080:8080 --name keycloak --network net-unifor -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:26.1.0 start-dev```
+```>docker run -d -p 8080:8080 --name keycloak --network net-unifor -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin -v keycloak-data:/opt/keycloak/data quay.io/keycloak/keycloak:26.1.0 start-dev```
 
 2.2 Execute o login no KeyCloak acessando a url *http://localhost:8080* utilizando as seguintes credenciais
 - login: **admin**
